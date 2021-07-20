@@ -12,7 +12,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import '.icons'
+import './icons'
+
+Vue.use(Element, {
+  size: Cookies.get('size') || 'medium',
+  locale: enLang
+})
 
 Vue.config.productionTip = false
 
