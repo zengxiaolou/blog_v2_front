@@ -1,17 +1,25 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
-import Layout from '@/layout'
-
-const routes = [
+export const constantRoutes = [
+  {
+    path: '/',
+    component: () => import('@/layout/index')
+  }
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+const createRouter = () => new Router({
+  scrollBehavior: () => ({ y: 0 }),
+  routes: constantRoutes
 })
+
+const router = createRouter()
+
+export function restRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher
+}
 
 export default router
