@@ -1,15 +1,16 @@
 <template>
   <div :class="classObj" class="app-wrapper">
     <navbar />
+    <settings />
   </div>
 </template>
 <script>
 import ResizeMixin from './mixin/ResizeHandler'
-import { Navbar } from './components'
+import { Navbar, Settings } from './components'
 import { mapState } from 'vuex'
 export default {
   name: 'Layout',
-  components: { Navbar },
+  components: { Navbar, Settings },
   mixins: [ResizeMixin],
   computed: {
     ...mapState({
