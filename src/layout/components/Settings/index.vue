@@ -4,7 +4,7 @@
       <h3 class="drawer-title">Page style setting</h3>
       <div class="drawer-item">
         <span>Theme Color</span>
-        <theme-picker style="float: right; height: 26px; margin: -3px 8px 0 0" />
+        <theme-picker style="float: right; height: 26px; margin: -3px 8px 0 0" @change="themeChange" />
       </div>
     </div>
   </div>
@@ -14,7 +14,15 @@
 import ThemePicker from '@/components/ThemePicker'
 export default {
   name: 'Settings',
-  components: { ThemePicker }
+  components: { ThemePicker },
+  methods: {
+    themeChange(val) {
+      this.$store.dispatch('settings/changeSetting', {
+        key: 'theme',
+        value: val
+      })
+    }
+  }
 }
 </script>
 
