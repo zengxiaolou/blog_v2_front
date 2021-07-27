@@ -1,16 +1,21 @@
 <template>
   <div :class="classObj" class="app-wrapper">
     <navbar />
-    <settings />
+    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+    <sidebar class="sidebar-container" />
+    <right-panel>
+      <settings />
+    </right-panel>
   </div>
 </template>
 <script>
+import RightPanel from '@/components/RightPanel'
 import ResizeMixin from './mixin/ResizeHandler'
-import { Navbar, Settings } from './components'
+import { Navbar, Settings, Sidebar } from './components'
 import { mapState } from 'vuex'
 export default {
   name: 'Layout',
-  components: { Navbar, Settings },
+  components: { Navbar, Settings, RightPanel, Sidebar },
   mixins: [ResizeMixin],
   computed: {
     ...mapState({
@@ -24,6 +29,11 @@ export default {
         withoutAnimation: this.sidebar.withoutAnimation,
         mobile: this.device === 'mobile'
       }
+    }
+  },
+  methods: {
+    handleClickOutside() {
+      this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
     }
   }
 }

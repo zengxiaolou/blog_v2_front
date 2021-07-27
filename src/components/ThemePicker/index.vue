@@ -26,7 +26,7 @@ export default {
   watch: {
     defaultTheme: {
       handler: function(val, oldVal) {
-        this.them = val
+        this.theme = val
       },
       immediate: true
     },
@@ -35,6 +35,7 @@ export default {
       if (typeof val !== 'string') return
       const themeCluster = this.getThemeCluster(val.replace('#', ''))
       const originalCluster = this.getThemeCluster(oldVal.replace('#', ''))
+      console.log(themeCluster, originalCluster)
 
       const $message = this.$message({
         message: ' Compiling the theme',
@@ -83,6 +84,14 @@ export default {
   },
 
   methods: {
+    updateStyle(style, oldCluster, newCluster) {
+      let newStyle = style
+      oldCluster.forEach((color, index) => {
+        newStyle = newStyle.replace(new RegExp(color, 'ig'), newCluster[index])
+      })
+      return newStyle
+    },
+
     getCSSString(url, variable) {
       return new Promise(resolve => {
         const xhr = new XMLHttpRequest()
@@ -122,9 +131,9 @@ export default {
         let green = parseInt(color.slice(2, 4), 16)
         let blue = parseInt(color.slice(4, 6), 16)
 
-        red += Math.round((1 - shade) * red)
-        green += Math.round((1 - shade) * green)
-        blue += Math.round((1 - shade) * blue)
+        red = Math.round((1 - shade) * red)
+        green = Math.round((1 - shade) * green)
+        blue = Math.round((1 - shade) * blue)
 
         red = red.toString(16)
         green = green.toString(16)
@@ -144,13 +153,17 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  .theme-picker .el-color-picker__trigger {
-    height: 26px !important;
-    width: 26px !important;
-    padding: 2px;
-  }
-  .theme-picker-dropdown {
-    display: none;
-  }
+<style lang="scss">
+.theme-message,
+.theme-picker-dropdown{
+  z-index: 99999 !important
+}
+.theme-picker .el-color-picker__trigger {
+  height: 26px !important;
+  width: 26px !important;
+  padding: 2px;
+}
+.theme-picker-dropdown .el-color-dropdown__link-btn{
+  display: none;
+}
 </style>

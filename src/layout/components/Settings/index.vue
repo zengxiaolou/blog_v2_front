@@ -15,6 +15,9 @@ import ThemePicker from '@/components/ThemePicker'
 export default {
   name: 'Settings',
   components: { ThemePicker },
+  data() {
+    return {}
+  },
   methods: {
     themeChange(val) {
       this.$store.dispatch('settings/changeSetting', {
@@ -30,7 +33,7 @@ export default {
 .drawer-container {
   padding: 24px;
   font-size: 14px;
-  line-height: 15;
+  line-height: 1.5;
   word-wrap: break-word;
 
   .drawer-title {
