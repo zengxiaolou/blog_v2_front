@@ -1,7 +1,7 @@
 <template>
-  <div class="components-container">
+  <div class="app-logo">
     <a href="/">
-      <svg-icon icon-class="lock" />
+      <svg-icon icon-class="stack" class-name="logo" />
       <span class="logo-title">Mess Stack</span>
     </a>
   </div>
@@ -15,22 +15,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.components-container {
-  height: 50px;
+.app-logo {
+  margin-left: 16px;
+  display: inline-block;
+  font-size: 18px;
   line-height: 50px;
-  text-align: center;
 }
 .logo {
-  width: 30px;
+  font-size: 30px;
+  color: #409EFF;
 }
 .logo-title {
   margin-left: 10px;
-}
-
-.test {
-  height: 85px;
-  width: 100px;
-  font-size: 30px;
-  color: #24292e;
 }
 </style>
