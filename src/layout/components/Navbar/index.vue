@@ -9,6 +9,26 @@
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
       </template>
+      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
+        <div class="avatar-wrapper">
+          <img :src="avatar" class="user-avatar">
+          <i class="el-icon-caret-bottom" />
+        </div>
+        <el-dropdown-menu slot="dropdown">
+          <router-link to="profile/index">
+            <el-dropdown-item>Profile</el-dropdown-item>
+          </router-link>
+          <router-link to="/">
+            <el-dropdown-item>Dashboard</el-dropdown-item>
+          </router-link>
+          <a href="https://github.com/zengxiaolou/" target="_blank">
+            <el-dropdown-item>Github</el-dropdown-item>
+          </a>
+          <el-dropdown-item divided @click.native="logout">
+            <span style="display: block;">Log Out</span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
   </div>
 </template>
@@ -23,9 +43,15 @@ import SizeSelect from '@/components/SizeSelect'
 export default {
   name: 'Navbar',
   components: { Logo, HeaderSearch, ScreenFull, SizeSelect },
+  data() {
+    return {
+      avatar: 'http://qiniu.messstack.com/avatar.dcfba41f.jpeg'
+    }
+  },
   computed: {
     ...mapGetters([
       'device'
+      // 'avatar'
     ])
   }
 }
@@ -62,6 +88,29 @@ export default {
 
         &:hover {
           background: rgba(0, 0, 0, .025);
+        }
+      }
+    }
+
+    .avatar-container {
+      margin-right: 30px;
+
+      .avatar-wrapper {
+        margin-top: 5px;
+        position: relative;
+        .user-avatar {
+          cursor: pointer;
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+        }
+
+        .el-icon-caret-bottom {
+          cursor: pointer;
+          position: absolute;
+          right: -20px;
+          top: 25px;
+          font-size: 12px;
         }
       }
     }
