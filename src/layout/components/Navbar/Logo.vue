@@ -18,6 +18,7 @@ export default {
 .app-logo {
   margin-left: 16px;
   display: inline-block;
+  float: left;
   font-size: 18px;
   line-height: 50px;
 }

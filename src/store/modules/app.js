@@ -40,6 +40,9 @@ const actions = {
   closeSideBar({ commit }, { withoutAnimation }) {
     commit('CLOSE_SIDEBAR', withoutAnimation)
   },
+  toggleDevice({ commit }, device) {
+    commit('TOGGLE_DEVICE', device)
+  },
   setSize({ commit }, size) {
     commit('SET_SIZE', size)
   }

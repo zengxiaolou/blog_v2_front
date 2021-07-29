@@ -1,6 +1,7 @@
 <template>
   <div class="navbar">
     <logo />
+    <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
     <div class="right-menu">
       <template v-if="device!=='mobile'">
         <header-search id="header-search" class="right-menu-item" />
@@ -39,10 +40,11 @@ import Logo from './Logo'
 import HeaderSearch from '@/components/HeaderSearch'
 import ScreenFull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
+import Hamburger from '@/components/Hamburger'
 
 export default {
   name: 'Navbar',
-  components: { Logo, HeaderSearch, ScreenFull, SizeSelect },
+  components: { Logo, HeaderSearch, ScreenFull, SizeSelect, Hamburger },
   data() {
     return {
       avatar: 'http://qiniu.messstack.com/avatar.dcfba41f.jpeg'
@@ -50,9 +52,19 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'sidebar',
       'device'
       // 'avatar'
     ])
+  },
+  methods: {
+    toggleSideBar() {
+      this.$store.dispatch('app/toggleSideBar')
+    },
+    async logout() {
+      await this.$store.dispatch('user/logout')
+      await this.$router.push(`/dashboard?redirect=${this.$route.fullPath}`)
+    }
   }
 }
 </script>
@@ -64,6 +76,19 @@ export default {
   position: relative;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
+  .hamburger-container {
+    line-height: 50px;
+    height: 50px;
+    cursor: pointer;
+    float: left;
+    transition: background .3s;
+    -webkit-tap-highlight-color: transparent;
+
+    &:hover {
+      background: rgba(0, 0, 0, .025);
+    }
+  }
 
   .right-menu {
     float: right;
