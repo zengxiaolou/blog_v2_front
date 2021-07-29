@@ -5,7 +5,9 @@
       <template v-if="device!=='mobile'">
         <header-search id="header-search" class="right-menu-item" />
         <screen-full id="screen_full" class="right-menu-item hover-effect" />
-
+        <el-tooltip effect="dark" content="Global Size" placement="bottom">
+          <size-select id="size-select" class="right-menu-item hover-effect" />
+        </el-tooltip>
       </template>
     </div>
   </div>
@@ -16,9 +18,11 @@ import { mapGetters } from 'vuex'
 import Logo from './Logo'
 import HeaderSearch from '@/components/HeaderSearch'
 import ScreenFull from '@/components/Screenfull'
+import SizeSelect from '@/components/SizeSelect'
+
 export default {
   name: 'Navbar',
-  components: { Logo, HeaderSearch, ScreenFull },
+  components: { Logo, HeaderSearch, ScreenFull, SizeSelect },
   computed: {
     ...mapGetters([
       'device'
