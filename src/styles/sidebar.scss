@@ -92,11 +92,11 @@
 
   .hideSidebar {
     .sidebar-container {
-      width: 54px !important;
+      width: $sideBarWidth !important;
     }
 
     .main-container {
-      margin-left: 54px;
+      margin-left: $sideBarWidth;
     }
 
     .submenu-title-noDropdown {

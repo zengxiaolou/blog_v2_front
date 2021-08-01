@@ -1,6 +1,6 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { resetRouter } from '@/router'
+import router, { resetRouter } from '@/router'
 
 const state = {
   token: getToken(),
@@ -94,6 +94,21 @@ const actions = {
       removeToken()
       resolve()
     })
+  },
+
+  // dynamically modify permissions
+  async changeRoles({ commit, dispatch }, role) {
+    const token = role + '-token'
+
+    commit('SET_TOKEN', token)
+    setToken(token)
+
+    const { roles } = await dispatch('getInfo')
+
+    resetRouter()
+    const accessRoutes = await dispatch('permission/generateRoutes', roles, { root: true })
+
+    router.addRoutes(accessRoutes)
   }
 }
 

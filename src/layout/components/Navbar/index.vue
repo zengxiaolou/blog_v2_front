@@ -1,7 +1,6 @@
 <template>
   <div class="navbar">
     <logo />
-    <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
     <div class="right-menu">
       <template v-if="device!=='mobile'">
         <header-search id="header-search" class="right-menu-item" />
@@ -40,11 +39,10 @@ import Logo from './Logo'
 import HeaderSearch from '@/components/HeaderSearch'
 import ScreenFull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
-import Hamburger from '@/components/Hamburger'
 
 export default {
   name: 'Navbar',
-  components: { Logo, HeaderSearch, ScreenFull, SizeSelect, Hamburger },
+  components: { Logo, HeaderSearch, ScreenFull, SizeSelect },
   data() {
     return {
       avatar: 'http://qiniu.messstack.com/avatar.dcfba41f.jpeg'
@@ -56,15 +54,6 @@ export default {
       'device'
       // 'avatar'
     ])
-  },
-  methods: {
-    toggleSideBar() {
-      this.$store.dispatch('app/toggleSideBar')
-    },
-    async logout() {
-      await this.$store.dispatch('user/logout')
-      await this.$router.push(`/dashboard?redirect=${this.$route.fullPath}`)
-    }
   }
 }
 </script>
