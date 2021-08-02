@@ -54,6 +54,12 @@ export default {
       'device'
       // 'avatar'
     ])
+  },
+  methods: {
+    async logout() {
+      await this.$store.dispatch('user/logout')
+      console.log('logout')
+    }
   }
 }
 </script>

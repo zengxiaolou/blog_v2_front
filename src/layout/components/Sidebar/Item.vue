@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .sub-el-icon {
   color: currentColor;
   width: 1em;

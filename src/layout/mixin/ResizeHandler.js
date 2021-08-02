@@ -15,7 +15,7 @@ export default {
     window.addEventListener('resize', this.$_resizeHandler)
   },
   beforeDestroy() {
-    window.addEventListener('resize', this.$_resize)
+    window.removeEventListener('resize', this.$_resizeHandler)
   },
   mounted() {
     const isMobile = this.$_isMobile()

@@ -7,7 +7,7 @@ import Layout from '@/layout'
 export const constantRoutes = [
   {
     path: '/redirect',
-    component: () => Layout,
+    component: Layout,
     hidden: true,
     children: [
       {
@@ -19,13 +19,13 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/index',
     children: [
       {
-        path: 'dashboard',
+        path: 'index',
         component: () => import('@/views/dashboard/index'),
-        name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        name: 'index',
+        meta: { title: 'Index', icon: 'dashboard', affix: true }
       }
     ]
   }
@@ -72,7 +72,8 @@ export const asyncRoutes = [
         }
       }
     ]
-  }
+  },
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({
@@ -84,7 +85,7 @@ const router = createRouter()
 
 export function resetRouter() {
   const newRouter = createRouter()
-  router.matcher = newRouter.matcher
+  router.matcher = newRouter.matcher // reset router
 }
 
 export default router

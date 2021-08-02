@@ -13,6 +13,7 @@ import router from './router'
 import store from './store'
 
 import '@/icons'
+import './permission'
 
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium',

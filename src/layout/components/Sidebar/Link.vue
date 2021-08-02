@@ -30,7 +30,7 @@ export default {
     linkProps(to) {
       if (this.isExternal) {
         return {
-          herf: to,
+          href: to,
           target: '_blank',
           rel: 'noopener'
         }
